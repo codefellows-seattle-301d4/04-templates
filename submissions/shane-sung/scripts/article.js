@@ -39,7 +39,7 @@ Article.prototype.toHtml = function() {
 
   // TODO: Use the function that Handlebars gave you to return your filled-in
   //       html template for THIS article.
-  
+
   return template(this);
 
 };
@@ -53,11 +53,17 @@ ourLocalData.forEach(function(ele) {
 });
 
 articles.forEach(function(a){
-  $('#author-filter').append(a.populateAuthorFilters());
+  var val = $(this).find('address a').text();
+  if ($('#author-filter option[value="' + val + '"]').length === 0){
+    $('#author-filter').append(a.populateAuthorFilters());
+  }
 });
 
 articles.forEach(function(a){
   $('#category-filter').append(a.populateCategoryFilters());
+  $('select option').each(function(){
+    $(this).siblings('[value="' + this.value + '"]').remove();
+  });
 });
 
 articles.forEach(function(a){
