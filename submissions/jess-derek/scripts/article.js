@@ -32,7 +32,6 @@ Article.prototype.toHtml = function() {
 Article.prototype.popfilters = function() {
   var $source = $('#author-filter-template').html();
   var filter = Handlebars.compile($source);
-  console.log(filter(this));
   return filter(this);
 };
 
