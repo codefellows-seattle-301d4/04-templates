@@ -29,6 +29,14 @@ Article.prototype.toHtml = function() {
   return template(this);
 };
 
+Article.prototype.popfilters = function() {
+  var $source = $('#author-filter-template').html();
+  var filter = Handlebars.compile($source);
+  console.log(filter(this));
+  return filter(this);
+};
+
+
 ourLocalData.sort(function(a,b) {
   return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
 });
@@ -39,4 +47,5 @@ ourLocalData.forEach(function(ele) {
 
 articles.forEach(function(a){
   $('#articles').append(a.toHtml());
+  $('#author-filter').append(a.popfilters());
 });
