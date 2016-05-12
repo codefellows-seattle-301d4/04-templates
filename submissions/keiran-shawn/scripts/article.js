@@ -28,6 +28,18 @@ Article.prototype.toHtml = function() {
   return template(this);
 };
 
+Article.prototype.populateAuthorFilters = function(){
+  var $authorSource = $('#filter-author-template').html();
+  var authorTemplate = Handlebars.compile($authorSource);
+  return authorTemplate(this);
+};
+
+Article.prototype.populateCategoryFilters = function(){
+  var $categorySource = $('#filter-category-template').html();
+  var categoryTemplate = Handlebars.compile($categorySource);
+  return categoryTemplate(this);
+};
+
 ourLocalData.sort(function(a,b) {
   return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
 });
@@ -37,5 +49,18 @@ ourLocalData.forEach(function(ele) {
 });
 
 articles.forEach(function(a){
+  $('#author-filter').append(a.populateAuthorFilters());
+  $('#category-filter').append(a.populateCategoryFilters());
+
+  $('select option').each(function() {
+    $(this).siblings('[value="' +this.value + '"]').remove();
+  });
+
+  // console.log($('#category-filter option').val());
+  //
+  // if(!$('#category-filter option')){
+  //   console.log($('#category-filter option:contains('+ a.category +')'));
+  //   $('#category-filter').append(a.populateCategoryFilters());
+  // }
   $('#articles').append(a.toHtml());
 });
