@@ -10,7 +10,9 @@ function Article (opts) {
 }
 
 Article.prototype.toHtml = function() {
-  // TODO: Use handlebars to render your articles!
+  var source   = $('#article-template').html();
+  var template = Handlebars.compile(source);
+  // DONE: Use handlebars to render your articles!
   //       - Select your template from the DOM.
   //       - Now "compile" your template with Handlebars.
 
@@ -21,8 +23,9 @@ Article.prototype.toHtml = function() {
   //   or say "(draft)" if it has no publication date:
   this.daysAgo = parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000);
   this.publishStatus = this.publishedOn ? 'published ' + this.daysAgo + ' days ago' : '(draft)';
+  return template(this);
 
-  // TODO: Use the function that Handlebars gave you to return your filled-in
+  // DONE: Use the function that Handlebars gave you to return your filled-in
   //       html template for THIS article.
 };
 
