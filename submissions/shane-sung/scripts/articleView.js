@@ -7,30 +7,7 @@ Handlebars.registerHelper('each', function(context){
     ret = ret + context[i].author;
     $('#author-filter').append(ret);
   }
-  // return ret;
 });
-
-// articleView.populateFilters = function() {
-//
-//   var $handlebarsSource = $('#filter-template').html();
-//   var template = Handlebars.compile($handlebarsSource);
-//   return template(this);
-//
-//
-//   // $('article').each(function() {
-//   //   if (!$(this).hasClass('template')) {
-//   //     var val = $(this).find('address a').text();
-//   //     var optionTag = '<option value="' + val + '">' + val + '</option>';
-//   //     $('#author-filter').append(optionTag);
-//   //
-//   //     val = $(this).attr('data-category');
-//   //     optionTag = '<option value="' + val + '">' + val + '</option>';
-//   //     if ($('#category-filter option[value="' + val + '"]').length === 0) {
-//   //       $('#category-filter').append(optionTag);
-//   //     }
-//   //   }
-//   // });
-// };
 
 articleView.handleAuthorFilter = function() {
   $('#author-filter').on('change', function() {
@@ -78,7 +55,6 @@ articleView.setTeasers = function() {
 };
 
 $(document).ready(function() {
-  // articleView.populateFilters();
   articleView.handleCategoryFilter();
   articleView.handleAuthorFilter();
   articleView.handleMainNav();

@@ -9,28 +9,16 @@ function Article (opts) {
   this.publishedOn = opts.publishedOn;
 }
 
-// Handlebars.registerHelper('each', function(){
-//   var ret = '';
-//   for (var i = 0; i < ourLocalData.length; i++){
-//     ret = ourLocalData[i].author;
-//   }
-//   return ret;
-// });
-
 Article.prototype.populateAuthorFilters = function() {
-
   var $handlebarsSource = $('#author-filter-template').html();
   var template = Handlebars.compile($handlebarsSource);
   return template(this);
-
 };
 
 Article.prototype.populateCategoryFilters = function() {
-
   var $handlebarsSource = $('#category-filter-template').html();
   var template = Handlebars.compile($handlebarsSource);
   return template(this);
-
 };
 
 Article.prototype.toHtml = function() {
@@ -51,6 +39,7 @@ Article.prototype.toHtml = function() {
 
   // TODO: Use the function that Handlebars gave you to return your filled-in
   //       html template for THIS article.
+  
   return template(this);
 
 };
