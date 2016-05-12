@@ -1,14 +1,6 @@
 // Configure a view object, to hold all our functions for dynamic updates and article-related event handlers.
 var articleView = {};
 
-Handlebars.registerHelper('each', function(context){
-  var ret = '';
-  for (var i = 0; i < context.length; i++){
-    ret = ret + context[i].author;
-    $('#author-filter').append(ret);
-  }
-});
-
 articleView.handleAuthorFilter = function() {
   $('#author-filter').on('change', function() {
     if ($(this).val()) {
