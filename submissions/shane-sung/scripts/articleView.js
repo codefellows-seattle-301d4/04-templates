@@ -1,27 +1,42 @@
 // Configure a view object, to hold all our functions for dynamic updates and article-related event handlers.
 var articleView = {};
 
-articleView.populateFilters = function() {
-  $('article').each(function() {
-    if (!$(this).hasClass('template')) {
-      var val = $(this).find('address a').text();
-      var optionTag = '<option value="' + val + '">' + val + '</option>';
-      $('#author-filter').append(optionTag);
+Handlebars.registerHelper('each', function(context){
+  var ret = '';
+  for (var i = 0; i < context.length; i++){
+    ret = ret + context[i].author;
+    $('#author-filter').append(ret);
+  }
+  // return ret;
+});
 
-      val = $(this).attr('data-category');
-      optionTag = '<option value="' + val + '">' + val + '</option>';
-      if ($('#category-filter option[value="' + val + '"]').length === 0) {
-        $('#category-filter').append(optionTag);
-      }
-    }
-  });
-};
+// articleView.populateFilters = function() {
+//
+//   var $handlebarsSource = $('#filter-template').html();
+//   var template = Handlebars.compile($handlebarsSource);
+//   return template(this);
+//
+//
+//   // $('article').each(function() {
+//   //   if (!$(this).hasClass('template')) {
+//   //     var val = $(this).find('address a').text();
+//   //     var optionTag = '<option value="' + val + '">' + val + '</option>';
+//   //     $('#author-filter').append(optionTag);
+//   //
+//   //     val = $(this).attr('data-category');
+//   //     optionTag = '<option value="' + val + '">' + val + '</option>';
+//   //     if ($('#category-filter option[value="' + val + '"]').length === 0) {
+//   //       $('#category-filter').append(optionTag);
+//   //     }
+//   //   }
+//   // });
+// };
 
 articleView.handleAuthorFilter = function() {
   $('#author-filter').on('change', function() {
     if ($(this).val()) {
       $('article').hide();
-      $('article[data-author="' + $(this).val() + '"]').fadeIn();
+      $('article[data-author="' + $(this).val().trim() + '"]').fadeIn();
     } else {
       $('article').fadeIn();
       $('article.template').hide();
@@ -63,7 +78,7 @@ articleView.setTeasers = function() {
 };
 
 $(document).ready(function() {
-  articleView.populateFilters();
+  // articleView.populateFilters();
   articleView.handleCategoryFilter();
   articleView.handleAuthorFilter();
   articleView.handleMainNav();

@@ -9,10 +9,37 @@ function Article (opts) {
   this.publishedOn = opts.publishedOn;
 }
 
+// Handlebars.registerHelper('each', function(){
+//   var ret = '';
+//   for (var i = 0; i < ourLocalData.length; i++){
+//     ret = ourLocalData[i].author;
+//   }
+//   return ret;
+// });
+
+Article.prototype.populateAuthorFilters = function() {
+
+  var $handlebarsSource = $('#author-filter-template').html();
+  var template = Handlebars.compile($handlebarsSource);
+  return template(this);
+
+};
+
+Article.prototype.populateCategoryFilters = function() {
+
+  var $handlebarsSource = $('#category-filter-template').html();
+  var template = Handlebars.compile($handlebarsSource);
+  return template(this);
+
+};
+
 Article.prototype.toHtml = function() {
   // TODO: Use handlebars to render your articles!
   //       - Select your template from the DOM.
   //       - Now "compile" your template with Handlebars.
+
+  var $handlebarsSource = $('#article-template').html();
+  var template = Handlebars.compile($handlebarsSource);
 
   // DONE: If your template will use properties that aren't on the object yet, add them.
   //   Since your template can't hold any JS logic, we need to execute the logic here.
@@ -24,6 +51,8 @@ Article.prototype.toHtml = function() {
 
   // TODO: Use the function that Handlebars gave you to return your filled-in
   //       html template for THIS article.
+  return template(this);
+
 };
 
 ourLocalData.sort(function(a,b) {
@@ -32,6 +61,14 @@ ourLocalData.sort(function(a,b) {
 
 ourLocalData.forEach(function(ele) {
   articles.push(new Article(ele));
+});
+
+articles.forEach(function(a){
+  $('#author-filter').append(a.populateAuthorFilters());
+});
+
+articles.forEach(function(a){
+  $('#category-filter').append(a.populateCategoryFilters());
 });
 
 articles.forEach(function(a){
