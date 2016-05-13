@@ -10,7 +10,9 @@ function Article (opts) {
 }
 
 Article.prototype.toHtml = function() {
-  // TODO: Use handlebars to render your articles!
+  var $source = $('#article-template').html();
+  var template = Handlebars.compile($source);
+  // TODO: DONE:Use handlebars to render your articles!
   //       - Select your template from the DOM.
   //       - Now "compile" your template with Handlebars.
 
@@ -24,6 +26,7 @@ Article.prototype.toHtml = function() {
 
   // TODO: Use the function that Handlebars gave you to return your filled-in
   //       html template for THIS article.
+  return template(this);
 };
 
 ourLocalData.sort(function(a,b) {
