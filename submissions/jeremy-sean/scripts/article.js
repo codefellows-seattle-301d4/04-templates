@@ -9,7 +9,7 @@ function Article (opts) {
   this.publishedOn = opts.publishedOn;
 }
 
-Article.prototype.toHtml = function(articles) {
+Article.prototype.toHtml = function(scriptTemplateId) {
   // TODO: Use handlebars to render your articles!
   //       - Select your template from the DOM.
   //       - Now "compile" your template with Handlebars.
@@ -19,8 +19,7 @@ Article.prototype.toHtml = function(articles) {
   //   The result is added to the object as a new property, which can then be referenced
   //   by a key in the template. For example, you might want to display how old a post is,
   //   or say "(draft)" if it has no publication date:
-  var $articleTemplateScript = $('#article-template').html();
-
+  var $articleTemplateScript = $(scriptTemplateId).html();
   this.daysAgo = parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000);
   this.publishStatus = this.publishedOn ? 'published ' + this.daysAgo + ' days ago' : '(draft)';
 
@@ -40,5 +39,5 @@ ourLocalData.forEach(function(ele) {
 });
 
 articles.forEach(function(a){
-  $('#articles').append(a.toHtml());
+  $('#articles').append(a.toHtml('#article-template'));
 });

@@ -17,19 +17,27 @@
         - Insert correct placeholder keys based on our Model.
     -->
     <script id="article-template" type="text/x-handlebars-template">
-      <article class="clearfix" data-author="author" data-category="category">
+      <article class="clearfix" data-author="{{author}}" data-category="{{category}}">
         <header>
           <h1>{{title}}</h1>
           <div class="byline">
             By <address><a href="{{authorUrl}}">{{author}}</a> {{publishStatus}}</address>
-
           </div>
         </header>
         <section class="article-body">{{{body}}}</section>
         <a href="#" class="read-on">Read on &rarr;</a>
       </article>
     </script>
+
+    <script id="author-filter-template" type="text/x-handlebars-template">
+    <option value="{{author}}">{{author}}</option>
+    </script>
+
+    <script id="category-filter-template" type="text/x-handlebars-template">
+    <option value="{{category}}">{{category}}</option>
+    </script>
   </head>
+
   <body>
     <header class="site-header clearfix">
       <section class="heading-group-h1">
@@ -50,9 +58,9 @@
       </nav>
     </header>
     <main>
+
       <section id="articles" class="tab-content">
-        <div>
-          <ul id="filters">
+        <ul id="filters">
             <li>
               <select id="author-filter">
                 <option value="">-- Filter by Authors --</option>
@@ -64,8 +72,8 @@
               </select>
             </li>
           </ul>
-        </div>
       </section>
+
       <section id="about" class="tab-content">
         <header>
           Welcome to my Blog
